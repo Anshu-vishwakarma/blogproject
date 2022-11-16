@@ -21,9 +21,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.login,name='login'),
-    path('logout/',auth_views.LogoutView.as_view(),name='logout'),
-    path('social-auth/',include('social_django.urls',namespace='social')),
+#     path('login/', views.login,name='login'),
+#     path('logout/',auth_views.LogoutView.as_view(),name='logout'),
+#     path('social-auth/',include('social_django.urls',namespace='social')),
     # path('oauth/',include('social_django.urls',namespace='social2')),
     path('',views.home,name='home'),
     # path('upimage/',include('img.urls')),
