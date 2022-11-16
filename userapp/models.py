@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from tkinter.tix import INTEGER
+
 from unicodedata import name
 from django.db import models
 import os
