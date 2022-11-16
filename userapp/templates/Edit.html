@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+<script type="text/javascript">
+    function edit(){
+        document.getElementById("btn1").style.display="block!important";
+        document.getElementById("btn2").style.display="block!important";
+        document.getElementById("btn3").style.display="block!important";
+        document.getElementById("btn4").style.display="block!important"; 
+    }
+</script>
+
+
+
+</head>
+
+
+<body>
+    <form name="fe" >
+        {% for i in res %}
+        <p class="offcanvas-title" id="fname" name="fname">Father Name:<input type="text" name="fname" value={{res.0.2}}>
+            
+            <button  id="btn1" style="display: none;">Edit</button>
+        </p><br><br>
+        <p class="offcanvas-title" id="gender" name="gender">Gender:<input type="text" name="gender" value={{res.0.5}}>
+            <button id="btn2" style="display: none;">Edit</button>
+        </p><br><br>
+        <p class="offcanvas-title" id="mobile" name="mobile">Mobile:<input type="text" name="mobile" value={{res.0.6}}>
+            <button id="btn3" style="display: none;">Edit</button>
+        </p><br><br>
+        <p class="offcanvas-title" id="dob" name="dob">DOB:<input type="text" name="dob" value={{res.0.7}}>
+            <button id="btn4" style="display: none;">Edit</button></p><br><br>
+        <button onclick="edit();">Enable Edit</button>    
+        <button type="submit" formaction="/editTask">Save</button>
+    {% endfor %}
+    </form>
+    <div class=" mt-5 text-light p-2" style="background-color:black">
+        <footer >
+            
+
+            <center>
+                <div id="copyright">
+                    &copy; All Rights Reserved 2022-2023
+                </div>
+                <div >
+                    <span>
+                        Designed by <a href="https://respectcoder.blogspot.com/">MindQ.Com</a>
+                    </span>
+                </div>
+            </center>
+        </footer>
+    </div>
+
+</body>
+
+</html>

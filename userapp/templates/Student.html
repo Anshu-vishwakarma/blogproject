@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<!-- <marquee behavior="alternate" direction="" class="alert-info " hspace="25%">
+  <h2>{{msg}}</h2>
+</marquee> -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.tiny.cloud/1/0pyqp9qmn5zuxh49k6396w20c98cd2daye8fzebgtgh8mh5w/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+  <script>
+    tinymce.init({ selector: "textarea" });
+    tinymce.init({ selector: "textarea2" });
+
+    function enable() {
+      document.getElementById("a").disabled = false;
+      document.getElementById("b").disabled = false;
+      document.getElementById("c").disabled = false;
+      document.getElementById("d").disabled = false;
+      document.getElementById("e").disabled = false;
+
+      document.getElementById("a").style.border = "1px solid black";
+      document.getElementById("b").style.border = "1px solid black";
+      document.getElementById("c").style.border = "1px solid black";
+      document.getElementById("d").style.border = "1px solid black";
+      document.getElementById("e").style.border = "1px solid black";
+      document.getElementById("e").value = "Save Changes";
+      document.getElementById("e").className = "btn btn-success text-light mt-3";
+      document.getElementById("f").hidden = false;
+      document.getElementById("pic").hidden = false;
+
+    }
+    function check() {
+      let x = document.getElementById("p1").value;
+      let y = document.getElementById("p2").value;
+      if (x == y) {
+        alert("Password match");
+        document.getElementById("bt").type = "submit";
+
+      }
+      else {
+        document.getElementById("bt").type = "button";
+        alert("Password not match");
+
+      }
+
+    }
+  </script>
+  <script src="https://cdn.tiny.cloud/1/0pyqp9qmn5zuxh49k6396w20c98cd2daye8fzebgtgh8mh5w/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ]
+    });
+  </script>
+</head>
+
+<body style="background-color: rgb(0, 0, 0);">
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0"
+    nonce="UDIJhes3"></script>
+  <div class="container">
+    <div class="topmenu p-2">
+      <nav class="navbar  ">
+        <div class="container-fluid">
+          <button class="btn btn-outline-success text-light" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Profile
+          </button>
+          {% for i in res %}
+          <div class="alert bg-light btn-outline-light "
+            style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+            <h2
+              style="text-align: center;color:black;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+              <b>_Welcome <u class="bg-warning"> {{i.name |title}}</u> In Blog Panel_</b>
+            </h2>
+          </div>
+          <form class="d-flex">
+            <a class="btn btn-outline-danger text-light" href="/">Logout</a>
+
+          </form>
+        </div>
+      </nav>
+      <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop"
+            aria-controls="offcanvasWithBackdrop">Enable backdrop
+        </button> -->
+      <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasWithBackdrop"
+        aria-labelledby="offcanvasWithBackdropLabel" style="background-color: rgb(3, 3, 3)">
+        <form action="/useredit" name="ctr" method="post" enctype="multipart/form-data">
+          <div class="offcanvas-header">
+            <h5 class="alert alert-danger"
+              style="text-align:center ;margin-left:500px; width: 180px; font-family: Arial, Helvetica, sans-serif; background-color: rgb(245, 220, 220);">
+              <b>My Profile</b>
+            </h5>
+
+            <button type="button" class="text-light btn btn-danger" data-bs-dismiss="offcanvas"
+              aria-label="Close">close</button>
+          </div>
+          <div class="offcanvas-body ">
+            <!-- <div class="alert alert-info">
+              <p class="offcanvas-title" id="id" name="id"><b>ID: &nbsp; {{i.id}}</b></p>
+              <p class="offcanvas-title" id="fname" name="fname"><b>Father-Name:&nbsp;{{i.fname}}</b></p>
+              <p class="offcanvas-title" id="email" name="email"><b>Email:&nbsp;{{i.email}}</b></p>
+              <p class="offcanvas-title" id="gender" name="gender"><b>Gender:&nbsp;{{i.gender}}</b></p>
+              <p class="offcanvas-title" id="mobile" name="mobile"><b>Mobile:&nbsp;{{i.mobile}}</b></p>
+              <p class="offcanvas-title" id="mobile" name="mobile"><b>Password:&nbsp;{{i.password}}</b></p>
+              <p class="offcanvas-title" id="dob" name="dob"><b>DOB:&nbsp;{{i.dob}}</b></p><br>
+              <a href="edit" class="btn btn-success">Edit Data</a> 
+            </div> -->
+            <section style="background-color:#011936FF">
+              <div class="container py-5">
+
+
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="card mb-4">
+                      {% for p in res %}
+                      <div class="card-body text-center" style="background-color: rgb(13, 156, 130);">
+                        {% if p.pimage %}
+                        <img src={{p.pimage}} alt="avatar" class="rounded-circle img-fluid"
+                          style="width: 200px;height: 200px;">
+                        <h5 hidden id="pic">change profile picture</h5>
+                        <input type="file" hidden name="pimage" id="f">
+                        {% else%}
+                        <br>
+                        <h5>click edit button for profile picture</h5>
+                        <input type="file" hidden name="pimage" id="f">
+                        {% endif %}
+                        {% endfor %}
+
+
+                        <b>
+                          <p style="text-align: center;color: white;">ID-{{i.id}}</p>
+                          <p style="color:white"><b>{{i.email}}</b></p>
+                        </b>
+                        <input type="text" hidden class=" mb-0" name="email1" value={{i.email}} id=""
+                          style="border:none ;">
+
+                        <!-- <p class=" mb-1">{{i.name}}</p> -->
+                        <div class="d-flex justify-content-center mb-2">
+                          <button type="button" class="btn btn-primary" onclick="enable();">Edit Profile</button>
+                          <button type="button" class="btn btn-outline-danger text-light ms-1" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal3">
+                            Change Password
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Full Name-</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <!-- <p class=" mb-0">{{i.name}}</p> -->
+                            <input type="text" disabled class=" mb-0" name="name1" value={{i.name}} id="a"
+                              style="border:none ;font-weight: bold;">
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Father Name-</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <input type="text" disabled class=" mb-0" name="fname1" value={{i.fname}} id="b"
+                              style="border:none ;font-weight: bold;">
+
+                            <!-- <p class=" mb-0">{{i.fname}}</p> -->
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+
+                            <p class="mb-0">Email-</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <input type="text" disabled class=" mb-0" name="" value={{i.email}} id=""
+                              style="border:none ;font-weight: bold;">
+
+                            <!-- <p class=" mb-0">{{i.email}}</p> -->
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Mobile-</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <input type="text" disabled class=" mb-0" name="mobile1" value={{i.mobile}} id="c"
+                              style="border:none ;font-weight: bold;">
+
+                            <!-- <p class=" mb-0">{{i.mobile}}</p> -->
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Gender-</p>
+                          </div>
+                          <div class="col-sm-9">
+                            
+                            <input type="text" disabled class=" mb-0" name="gender1" value={{i.gender}} id="d"
+                              style="border:none ;font-weight: bold;">
+
+                            <!-- <p class=" mb-0">{{i.gender}}</p> -->
+                          </div>
+                          <input type="text" hidden class=" mb-0" name="mid" value={{i.id}} id="d"
+                            style="border:none ;font-weight: bold; ">
+
+                        </div>
+                        <center> <input type="submit" disabled class=" mb-0 w-25  mt-3" id="e"
+                            style="border:none ;font-weight: bold;" value="">
+                        </center>
+                      </div>
+                    </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+
+
+
+  <form action="/passchange" method="post">
+    <input type="text" name="pid" hidden value={{i.id}}>
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" name="p1" id="p1" placeholder="Enter New Password"> <br>
+            <input type="text" class="form-control" name="p2" id="p2" placeholder="Confirm Password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" id="bt" onclick="check();" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+
+
+
+
+
+  </form>
+  </div>
+  </div>
+  </div>
+  <div class="menu bg-light p-2">
+    <ul class="nav justify-content-start">
+      <li class="nav-item p-3 " style=" text-decoration: none;border-radius: 15px;">
+        <!-- <a class="nav-item btn btn-outline-danger" href="/home2" style="color:white ; text-decoration:none;">Home</a>
+        &nbsp;<b style="color:white ;">|</b>&nbsp; -->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary btn-lg p-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo">Create New Post</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          Show My All Posts
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+              <div class="modal-header bg-info">
+                <h5 class="modal-title" id="exampleModalLabel">Tell Us Something!!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="/post" method="post" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <input hidden type="text" value="{{i.name}}" name="name">
+                    <input hidden type="text" value="{{i.email}}" name="email">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Title:</label>
+                    <input type="text" class="form-control" name="titlename" placeholder="Enter Title">
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">Image</label>
+                    <input class="form-control" name="image" type="file" id="formFile">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Select Catogery:</label>
+
+                    <select name="category" id="" style="width:100% ; height: 40px;">
+                      <option value="education">Education</option>
+                      <option value="sport">Sport</option>
+                      <option value="funny">Funny</option>
+                      <option value="politics">Politics</option>
+                      <option value="business">business</option>
+                      <option value="fullstack">Fullstack</option>
+                      <option value="frontend">Frontend</option>
+                      <option value="backend">Backend</option>
+
+                    </select>
+                  </div>
+
+                  <!-- <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Choose Picture:</label>
+                    <input type="file" class="form-control" name="img">
+                  </div> -->
+
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="textarea" name="textdata"
+                      placeholder="Enter your content"></textarea>
+
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <hr style="height:20px;border-radius:35px;">
+  {% for j in blog %}
+  <div>
+    <div class="card border-primary  m-auto mb-2 ">
+      <div class="card-body text-primary">
+        <h5 class="card-title w-50 m-auto mb-3 p-3 alert btn-outline-light bg-dark"
+        style=" text-align: center;font-size: 35px;">
+
+
+        {{j.title|title}}</h5>
+        {% if j.image %}
+        <center><img src={{j.image}} alt="not found" style='height:400px;border-radius: 19px;' class="w-75"></center>
+        {% endif %}
+
+        <br>
+       
+        <div class="card-text m-auto  bg-dark text-light" style="border-radius: 23px ;">
+          <div class="bg-light text-dark p-5" style="border-radius:20px ;">{{j.data|safe}}
+
+            <hr>
+            <center>
+              <div class="fb-like w-25 " data-href="http://127.0.0.1:8000/checklogin{{j.id}}" data-width=""
+                data-layout="button" data-action="like" data-size="small" data-share="true"></div>
+              <div class="row">
+                <div class="col-2">
+                  <h4 class="alert bg-dark text-light  " style="float: right; float: left;width:40px;">
+                    {{j.category|title}}</h4>
+                </div>
+
+                <div class=" col-8 fb-comments" data-href="http://127.0.0.1:8000/checklogin{{j.id}}" data-width=""
+                  data-numposts="">
+                </div>
+
+                <div class="col-2">
+                  <h4 class="alert bg-dark text-light " style="width:100px ;">{{j.datetime}}</h4>
+
+                </div>
+                <h4 class="alert bg-dark text-light " style="float:right;">Posted_By-@{{j.name|title}}_blogger</h4>
+              </div>
+            </center>
+          </div>
+
+        </div>
+
+
+
+
+        <br>
+
+
+
+      </div>
+    </div>
+    <!-- <div class="alert alert-primary mx-5" style="height:auto;">
+    <u> <h3>{{j.title}}-</h3></u>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {{j.data}} &nbsp;<h3 style="float: right;">-{{j.name}}</h3>
+  <br>
+    </div> <br> -->
+
+
+
+
+    {% endfor %}
+
+
+    {% endfor %}
+    <div class="modal fade " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+      <div class="modal-dialog modal-fullscreen px-3" style="background-color: #FEAE51FF;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">My Posts</h5>
+            <button type="btn " class="text-danger btn btn-outline-danger text-dark" data-bs-dismiss="modal"
+              aria-label="Close">Close</button>
+          </div>
+          <form action="/blogDelete" method="post">
+            <div class="modal-body">
+              {% if mypost %}
+              {% for k in mypost %}
+              {% if k.image %}
+              <input type="text" value={{k.id}} name="eid" hidden>
+              <center><img src={{k.image}} alt="not found" style='width:100%;height:300px' name="img"></center>
+              {% endif %}
+              <div class="bg-dark">
+
+                <h5 class="card-title  table-info w-50 m-auto mb-3 p-3" name="title"
+                  style="background-color: rgb(239, 238, 244); text-align: center;font-size: 25px;">
+
+                  Title-{{k.title}}-</h5>
+
+                <div class="card-text w-75 m-auto p-3 text-white" style="border: 3px solid white;" name="data">
+                  {{k.data|safe}} </div>
+
+              </div>
+              <button type="submit" class="btn btn-outline-danger">Delete</button>
+          </form>
+          <hr>
+
+
+          {% endfor %}
+          {% else %}
+          <center>
+            <h3>No data availible!!</h3>
+          </center>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class=" mt-5 text-light p-2" style="background-color:black">
+    <footer>
+
+
+      <center>
+        <div id="copyright">
+          &copy; All Rights Reserved 2022-2023
+        </div>
+        <div>
+          <span>
+            Designed by <a href="/">MindQ.Com</a>
+          </span>
+        </div>
+      </center>
+    </footer>
+  </div>
+
+
+  </div>
+  <!-- Button trigger modal -->
+
+
+  <!-- Modal -->
+
+
+
+
+
+  </div>
+
+
+  <script>
+    var editor = new FroalaEditor('#txtdata');
+  </script>
+</body>
+
+</html>

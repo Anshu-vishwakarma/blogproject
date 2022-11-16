@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+	<title>Login Page</title>
+
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	
+
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Numans');
+
+		html,
+		body {
+
+
+
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 100%;
+			font-family: 'Numans', sans-serif;
+		}
+
+		.container {
+			height: 100%;
+			align-content: center;
+		}
+
+		.card {
+			height: 430px;
+			margin-top: auto;
+			margin-bottom: auto;
+			width: 400px;
+			background-color: rgba(0, 0, 0, 0.5) !important;
+		}
+
+		.social_icon span {
+			font-size: 60px;
+			margin-left: 10px;
+			color: #FFC312;
+		}
+
+		.social_icon span:hover {
+			color: white;
+			cursor: pointer;
+		}
+
+		.card-header h3 {
+			color: white;
+		}
+
+		.social_icon {
+			position: absolute;
+			right: 20px;
+			top: -45px;
+		}
+
+		.input-group-prepend span {
+			width: 50px;
+			background-color: #FFC312;
+			color: black;
+			border: 0 !important;
+		}
+
+		input:focus {
+			outline: 0 0 0 0 !important;
+			box-shadow: 0 0 0 0 !important;
+
+		}
+
+		.remember {
+			color: white;
+		}
+
+		.remember input {
+			width: 20px;
+			height: 20px;
+			margin-left: 15px;
+			margin-right: 5px;
+		}
+
+		.login_btn {
+			color: black;
+			background-color: #FFC312;
+			width: 100px;
+		}
+
+		.login_btn:hover {
+			color: black;
+			background-color: white;
+		}
+
+		.links {
+			color: white;
+		}
+
+		.links a {
+			margin-left: 4px;
+		}
+	</style>
+	<script type="text/javascript">
+		/* Function to Generat Captcha */
+		function GenerateCaptcha() {
+			var chr1 = Math.ceil(Math.random() * 10) + '';
+			var chr2 = Math.ceil(Math.random() * 10) + '';
+			var chr3 = Math.ceil(Math.random() * 10) + '';
+
+			var str = new Array(4).join().replace(/(.|$)/g, function () { return ((Math.random() * 36) | 0).toString(36)[Math.random() < .5 ? "toString" : "toUpperCase"](); });
+			var captchaCode = str + chr1 + ' ' + chr2 + ' ' + chr3;
+			document.getElementById("txtCaptcha").value = captchaCode;
+			document.getElementById("abcd").innerHTML = "";
+
+
+		}
+
+		/* Validating Captcha Function */
+		function ValidCaptcha() {
+			var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+			var str2 = removeSpaces(document.getElementById('txtCompare').value);
+
+			if (str1 == str2) {
+				document.getElementById("save").type = "submit";
+				document.getElementById('txtCompare').style.border = ''
+
+				return true;
+			};
+			document.getElementById('abcd').innerHTML = "Wrong captcha";
+			document.getElementById('txtCompare').value = "";
+			document.log.txtCompare.focus();
+
+			document.getElementById('txtCompare').style.border = '2px solid red'
+			return false;
+		}
+
+		/* Remove spaces from Captcha Code */
+		function removeSpaces(string) {
+			return string.split(' ').join('');
+		}  
+	</script>
+</head>
+
+<body onload="GenerateCaptcha();" style=background-image:url({% static 'images/d.webp' %});>
+
+	<div class="container  border border-danger">
+		<div class="mt-3">
+			<h1 style="text-align: center; color:white;font-weight: bold;box-shadow: rgba(111, 220, 128, 0.25) 0px 30px 60px  , rgba(0, 0, 0, 0.3) 0px 18px 36px  inset;" >Welcome To Creative MindQ Blog</h1>
+		</div>
+		<div class="row mt-3 p-2" >
+			<div class="col-3 w-100 " style=background-image:url({% static 'images/d.webp' %});>
+			
+			</div>
+			<div class="col-6 ">
+				<div class="container">
+					<div class="d-flex justify-content-center h-100">
+
+						<div class="card" style=background-image:url({% static 'images/bg.gif' %})>
+
+							<div class="d-flex justify-content-between m-2">
+								<button class="btn btn-danger">
+									<a href="{% url 'social:begin' 'google-oauth2'%}"
+										style="text-decoration:none;color:rgb(231, 222, 222)">Login With Google</a>
+									<!-- <a href="{% url 'social:begin' 'facebook-oauth2'%}">Login With Facebook</a> -->
+								</button>
+								<button class="btn btn-primary">
+									<a href="{% url 'social:begin' 'facebook'%}"
+										style="text-decoration:none; color:rgb(250, 250, 250)">Login With Facebook</a>
+								</button>
+							</div>
+
+							<div class="card-body">
+								<form name="log" action="/checklogin" method="post">
+									<div class="input-group form-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-user"></i></span>
+										</div>
+										<input type="text" class="form-control" placeholder="email" name="email"
+											required>
+
+									</div>
+									<div class="input-group form-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-key"></i></span>
+										</div>
+										<input type="password" class="form-control" placeholder="password"
+											name="password" required>
+
+									</div>
+									<center>
+										<b><a href="/forgot">Forgotten password?
+											</a> </b><br>
+										<span> <input type="text" id="txtCaptcha"
+												style="text-align:center; border:none;font-weight:bold; width: 200px; margin-bottom: 10px; font-family:Modern; height:40px; font-size:30px;background-image:url({% static 'images/captcha.jpg'%}) " />
+											<br>
+										</span> <input type="text" autocomplete="off" id="txtCompare" placeholder="Enter Captcha..!!"
+											style="text-align: center ;margin-bottom: 10px;" />
+										<br><span id="abcd" style="color: red;margin-right:5px"></span><input
+											type="button" id="btnrefresh" value="Refresh"
+											onclick="GenerateCaptcha();" />
+									</center>
+									<div class="form-group m-auto">
+										<input type="" id="save" value="Login" onclick="ValidCaptcha();"
+											class="btn float-left login_btn mt-2" style="margin-left:70px ;">
+										<select name="role" id="" class="mt-2" style="height:38px ; margin-left: 10px;">
+											<option value="User">User</option>
+											<option value="Admin">Admin</option>
+											<!-- <option  value="Faculty">Faculty</option> -->
+										</select>
+
+
+									</div>
+									<div class="d-flex justify-content-center links mt-2">
+										Don't have an account?<a href="/SignUp">Sign Up</a>
+									</div>
+								</form>
+								<center>
+									<marquee behavior="" loop="1" class="w-50" direction="left">
+										<h2 id="abc" style='color:red'>{{wrn}}</h2>
+									</marquee>
+								</center>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3 text-light" style=background-image:url({% static 'images/d.webp' %})>
+			  
+			</div>
+		</div>
+		<div class="bg-info" hidden >
+			<div class="social-links social-1  float-right">
+			<a href=""><i class="fab fa-facebook-f"></i></a>
+			<a href=""><i class="fab fa-twitter"></i></a>
+			<a href=""><i class="fab fa-linkedin-in"></i></a>
+			<a href=""><i class="fab fa-instagram"></i></a>
+			<a href=""><i class="fab fa-tumblr"></i></a>
+			<a href=""><i class="fab fa-reddit-alien"></i></a>
+		</div>
+	</div>
+
+
+
+
+
+		<div class=" mt-5 text-light p-2" style="background-color:black">
+			<footer >
+				
+	
+				<center>
+					<div id="copyright">
+						&copy; All Rights Reserved 2022-2023
+					</div>
+					<div >
+						<span>
+							Designed by <a href="https://respectcoder.blogspot.com/">MindQ.Com</a>
+						</span>
+					</div>
+				</center>
+			</footer>
+		</div>
+
+
+
+	</div>
+</body>
+
+</html>

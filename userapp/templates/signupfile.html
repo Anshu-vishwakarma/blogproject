@@ -1,0 +1,550 @@
+<a href="/" class="" style="width: 10px ;height: 20px; background-color: #131617; border-radius:20% ;"></a>
+
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <title>Login Page</title>
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <script>
+
+        function hide() {
+            document.getElementById("msg").innerHTML = "";
+
+        }
+
+
+
+        function check() {
+            name = document.f1.name.value;
+
+            if (name == "") {
+                document.f1.name.focus();
+                document.getElementById("name1").style.color = "red";
+
+                document.getElementById("name1").innerHTML = "name field not empty!!!";
+                return false;
+            }
+            if (name.length >= 20) {
+                name = document.f1.name.value = "";
+                document.f1.name.focus();
+                document.getElementById("name1").style.color = "red";
+                document.getElementById("name1").innerHTML = "Name can contain lessthan 20 character";
+                return false;
+            }
+            else {
+                if (name.length <= 1) {
+                    name = document.f1.name.value = "";
+                    document.f1.name.focus();
+                    document.getElementById("name1").style.color = "red";
+                    document.getElementById("name1").innerHTML = "your name should be 2 character";
+                    return false;
+                }
+
+
+                else {
+                    var a = /^[A-Za-z]+$/;
+                    if ((name.match(a)) || (name.match(" "))) {
+                        document.getElementById("name").className = "";
+                        document.getElementById("name1").style.color = "green";
+                        document.getElementById("Fname").disabled = false;
+                        document.getElementById("name1").innerHTML = "";
+
+                        return true;
+                    }
+                    else {
+                        name = document.f1.name.value = "";
+                        document.f1.name.focus();
+                        document.getElementById("name1").style.color = "red";
+                        document.getElementById("name1").innerHTML = "Name must be string only!!!";
+                        return false;
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        function check1() {
+            document.getElementById("name1").innerHTML = "";
+
+            Fname = document.f1.Fname.value;
+
+
+            if (Fname == "") {
+                Fname = document.f1.Fname.value = "";
+                document.getElementById("Fname1").style.color = "red";
+                document.f1.Fname.focus();
+                document.getElementById("Fname1").innerHTML = "Fname field not empty!!!";
+                document.getElementById("Fname").classname = "error";
+                return false;
+            }
+            if (Fname.length >= 20) {
+                name = document.f1.Fname.value = "";
+                document.f1.Fname.focus();
+                document.getElementById("Fname1").style.color = "red";
+                document.getElementById("Fname1").innerHTML = "Father name can contain lessthan 20 character";
+                return false;
+            }
+            else {
+                if (Fname.length <= 1) {
+                    Fname = document.f1.Fname.value = "";
+                    document.getElementById("Fname1").style.color = "red";
+                    document.f1.Fname.focus();
+                    document.getElementById("Fname1").innerHTML = "Father name must contain at least two character ...";
+                    document.getElementById("Fname").classname = "error";
+                    return false;
+                }
+                else {
+                    var a = /^[A-Za-z]+$/;
+                    if ((Fname.match(a)) || (Fname.match(" "))) {
+                        document.getElementById("Fname").classname = "";
+                        document.getElementById("Fname1").style.color = "green";
+                        document.getElementById("email").disabled = false;
+                        document.getElementById("Fname1").innerHTML = "";
+
+                        return true;
+                    }
+                    else {
+                        Fname = document.f1.Fname.value = "";
+                        document.getElementById("Fname1").style.color = "red";
+                        document.f1.Fname.focus();
+                        document.getElementById("Fname1").innerHTML = " Name must be string only!!!";
+                        document.getElementById("Fname").classname = "error";
+                        return false;
+                    }
+                    document.getElementById("Fname").classname = "";
+                    document.getElementById("Fname1").style.color = "green";
+                    document.getElementById("Fname1").innerHTML = "";
+
+                    document.getElementById("email").disabled = false;
+                    return true;
+                }
+                document.getElementById("Fname").classname = "";
+                document.getElementById("Fname1").style.color = "green";
+                document.getElementById("email").disabled = false;
+                return true;
+            }
+        }
+        function check4() {
+            document.getElementById("Fname1").innerHTML = "";
+
+            email = document.f1.email.value;
+            if (email == "") {
+                email = document.f1.email.value = "";
+                document.getElementById("email1").style.color = "red";
+
+                document.f1.email.focus();
+                document.getElementById("email1").innerHTML = "Email field not empty!!!";
+                document.getElementById("email").classname = "error";
+                return false;
+            }
+            a = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (email.match(a)) {
+                document.getElementById("email").classname = "";
+                document.getElementById("email1").style.color = "green";
+
+                return true;
+            }
+            else {
+                document.getElementById("email1").style.color = "red";
+
+                document.f1.email.focus();
+                document.getElementById("email1").innerHTML = "invailid email";
+                document.getElementById("email").classname = "error";
+                return false;
+            }
+        }
+        function check2() {
+            password = document.f1.password.value;
+            document.getElementById("email1").innerHTML = "";
+            document.getElementById("Cpassword").disabled = false;
+
+
+            if (password == "") {
+                document.getElementById("password1").style.color = "red";
+                document.getElementById("password").classname = "error1";
+                password = document.f1.password.value = "";
+                document.f1.password.focus();
+                document.getElementById("password1").innerHTML = "password field not be empty!!!";
+                return false;
+            }
+            if (password.length >= 10) {
+                password = document.f1.password.value = "";
+                document.getElementById("password1").style.color = "red";
+                document.f1.password.focus();
+                document.getElementById("password1").innerHTML = "password can only contain lessthan 10 character ";
+                document.getElementById("password").classname = "error1";
+                return false;
+            }
+            else {
+                if (password.length <= 4) {
+                    password = document.f1.password.value = "";
+                    document.getElementById("password1").style.color = "red";
+
+                    document.f1.password.focus();
+                    document.getElementById("password1").innerHTML = "your password length must be 5 character ";
+                    document.getElementById("password").classname = "error1";
+                    return false;
+                }
+                else {
+                    var a = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    if (password.match(a)) {
+
+                        document.getElementById("password1").style.color = "green";
+
+                        document.getElementById("password1").innerHTML = "your password is strong!!!";
+                        return false;
+                    }
+                    else {
+
+                        document.getElementById("password1").innerHTML = "your password is weak!!";
+                        document.getElementById("password1").style.color = "yellow";
+
+                        return true;
+                    }
+                    document.getElementById("password").classname = "";
+                    document.getElementById("password1").style.color = "yellow";
+                    return true;
+                }
+                document.getElementById("password1").style.color = "yellow";
+                return true;
+            }
+        }
+
+        function check21() {
+            Cpassword = document.f1.Cpassword.value;
+            password = document.f1.password.value;
+            if (Cpassword == password) {
+                document.getElementById("password1").innerHTML = "password matched!!!";
+
+            }
+            else {
+                password = document.f1.Cpassword.value = "";
+                password = document.f1.password.value = "";
+
+                document.getElementById("password1").innerHTML = "password not matched!!!";
+
+                document.f1.password.focus();
+            }
+
+
+        }
+        function check212() {
+            mobile = document.f1.mobile.value;
+            if (mobile == "") {
+                document.f1.mobile.focus();
+                document.getElementById("mobile1").style.color = "red";
+                document.getElementById("mobile1").innerHTML = "mobile field not be empty!!!";
+                return false;
+            }
+            if (mobile.length > 10) {
+                document.f1.mobile.focus();
+                document.getElementById("mobile1").style.color = "red";
+                document.getElementById("mobile1").innerHTML = "Mobile Number Not Vailid!!!";
+                return false;
+            }
+            if (mobile.length < 10) {
+                document.f1.mobile.focus();
+                document.getElementById("mobile1").style.color = "red";
+                document.getElementById("mobile1").innerHTML = "Mobile Number Not Vailid!!!";
+                return false;
+            }
+            else {
+                if (isNaN(mobile)) {
+                    document.f1.mobile.focus();
+                    document.getElementById("mobile1").style.color = "red";
+                    document.getElementById("mobile1").innerHTML = "please enter Number only !!!";
+                    return false;
+                }
+
+                else {
+                    document.getElementById("mobile").classname = "";
+                    document.getElementById("mobile1").innerHTML = "";
+                    return true;
+                }
+            }
+        }
+
+
+
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Numans');
+
+        html,
+        body {
+
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 700px;
+            font-family: 'Numans', sans-serif;
+        }
+
+        .container {
+            height: 100%;
+            align-content: center;
+        }
+
+        .card {
+            height: 650px;
+            margin-top: auto;
+            margin-bottom: auto;
+            width: 700px;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .social_icon span {
+            font-size: 60px;
+            margin-left: 10px;
+            color: #FFC312;
+        }
+
+        .social_icon span:hover {
+            color: white;
+            cursor: pointer;
+        }
+
+        .card-header h3 {
+            color: white;
+        }
+
+        .social_icon {
+            position: absolute;
+            right: 20px;
+            top: -45px;
+        }
+
+        .input-group-prepend span {
+            width: 50px;
+            background-color: #FFC312;
+            color: black;
+            border: 0 !important;
+        }
+
+        input:focus {
+            outline: 0 0 0 0 !important;
+            box-shadow: 0 0 0 0 !important;
+
+        }
+
+        .remember {
+            color: white;
+        }
+
+        .remember input {
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+            margin-right: 5px;
+        }
+
+        .login_btn {
+            color: black;
+            background-color: #FFC312;
+            width: 100px;
+        }
+
+        .login_btn:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .links {
+            color: white;
+        }
+
+        .links a {
+            margin-left: 4px;
+        }
+    </style>
+
+</head>
+
+
+<body class="badge-dark ">
+    <div class="container ">
+        <div class="mt-3 p-2">
+            <h1
+                style="text-align: center; color:white;font-weight: bold;box-shadow: rgba(9, 12, 10, 0.25) 0px 30px 60px  , rgba(5, 0, 0, 0.3) 0px 18px 36px  inset; background-color:black ; padding: 5px;">
+                Welcome To Creative MindQ Blog</h1>
+        </div>
+        <div class="row mt-3">
+
+            <div class="col ">
+                <div class="container">
+                    <center>
+                        <h3 id="msg" class="text-dark alert-info w-50">
+                            <marquee behavior="alternate" direction="" scrollamount="2"><b>{{a}}</b></marquee>
+                        </h3>
+                    </center>
+
+                    <div class="d-flex justify-content-center h-100">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-header">
+                                <u>
+
+                                    <h3 style="text-align:center ; ">Registration Form</h3>
+                                </u>
+                                <div class="d-flex justify-content-end social_icon">
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form action="/savedata" name="f1" method="post">
+
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" title="your name" class="form-control" id="name" required
+                                            onblur="return check();" placeholder="Enter Full name" name="name"
+                                            onclick="hide();" style="width: 100%;" value="{{name}}">
+
+                                    </div><span id="name1"></span>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control" title="Your Father name" required
+                                            id="Fname" onblur="return check1();" placeholder="Enter Father name"
+                                            name="Fname" value="{{fname}}">
+
+                                    </div> <span id="Fname1"></span>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input onclick="hide();" type="email" title="Your Email Address"
+                                            class="form-control" id="email" required onblur="return check4();"
+                                            placeholder="Enter email" name="email" value="{{email}}">
+
+                                    </div><span id="email1"></span>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input onclick="hide();" type="password" title="your password"
+                                            class="form-control" required id="password" onblur="return check2();"
+                                            placeholder="Enter password" name="password" value="">
+
+                                    </div><span id="password1"></span>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input onclick="hide();" type="password" disabled title="your confirm password"
+                                            class="form-control" required id="Cpassword" onblur="return check21();"
+                                            placeholder="Re-Enter password" name="Cpassword">
+
+                                    </div><span id="Cpassword1"></span>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        &nbsp;&nbsp;&nbsp;<b style="color:white ;">Gender : &nbsp;male&nbsp; <input
+                                                title="Gender" onclick="hide();" type="radio" required name="gender"
+                                                id="" value="male" style="width: 20px; height: 10px;margin-top: 7px; ">
+                                            &nbsp;
+                                            female&nbsp; <input type="radio" title="Gender" onclick="hide();"
+                                                name="gender" id="" required value="female"
+                                                style="width: 20px; height: 10px; margin-top: 7px;">&nbsp;
+                                        </b>
+                                    </div>
+                                    <span id="mobile1" style="color: red;"></span>
+
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input onclick="hide();" title="Mobile Number" type="text" class="form-control"
+                                            id="mobile" required placeholder="Enter Mobile Number"
+                                            onblur="return check212();" name="mobile" value="{{mobile}}">
+
+                                    </div>
+                                    <div class="input-group form-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input onclick="hide();" type="date" title="Date of Birth"
+                                            max="2015-12-31" class="form-control" id="dob" required
+                                            placeholder="Enter dob" name="dob" value="{{dob}}">
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="submit" value="SignUp" class="btn float-right login_btn ">
+                                        <select name="role" id="" class="p-2 ">
+                                            <option value="User">User</option>
+                                            <!-- <option  value="Faculty">Faculty</option> -->
+
+                                        </select>
+                                    </div>
+                                </form>
+                                <div class="d-flex justify-content-center links">
+                                    <h3>if you have an account?<a href="LogIn" style="color:#240497">LogIn</a></h3>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="bg-info" hidden>
+            <div class="social-links social-1  float-right">
+                <a href=""><i class="fab fa-facebook-f"></i></a>
+                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href=""><i class="fab fa-tumblr"></i></a>
+                <a href=""><i class="fab fa-reddit-alien"></i></a>
+            </div>
+        </div>
+
+
+
+
+
+        <div class=" mt-5 text-light p-2" style="background-color:black">
+            <footer>
+
+
+                <center>
+                    <div id="copyright">
+                        &copy; All Rights Reserved 2022-2023
+                    </div>
+                    <div>
+                        <span>
+                            Designed by <a href="https://respectcoder.blogspot.com/">MindQ.Com</a>
+                        </span>
+                    </div>
+                </center>
+            </footer>
+        </div>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>

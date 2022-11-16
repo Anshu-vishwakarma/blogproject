@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 max-auto social-container my-2 order-md-1">
+            <button class="btn btn-danger mb-2">
+                <a href="{% url 'social:begin' 'google-oauth2'%}">Login With Google</a>  
+                <!-- <a href="{% url 'social:begin' 'facebook-oauth2'%}">Login With Facebook</a> -->
+            </button>
+            <button class="btn btn-primary mb-2">
+                <a href="gmail">Login With Gmail</a>
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+

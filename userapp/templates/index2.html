@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<!-- <marquee behavior="alternate" direction="" class="alert-info " hspace="25%">
+  <h2>{{msg}}</h2>
+</marquee> -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script type="module" src="./index.js"></script>
+  <script>// Initialize and add the map
+    function initMap() {
+      // The location of Uluru
+      const uluru = { lat: -25.344, lng: 131.031 };
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 4,
+        center: uluru,
+      });
+      // The marker, positioned at Uluru
+      const marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+      });
+    }
+
+    window.initMap = initMap;</script>
+  <style>
+    /* 
+        * Always set the map height explicitly to define the size of the div element
+        * that contains the map. 
+        */
+    #map {
+      height: 100%;
+    }
+
+    /* 
+        * Optional: Makes the sample page fill the window. 
+        */
+  </style>
+  <style>
+    .map-container-section {
+      overflow: hidden;
+      padding-bottom: 56.25%;
+      position: relative;
+      height: 0;
+    }
+
+    .map-container-section iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  </style>
+  <script type="text/javascript">
+    /* Function to Generat Captcha */
+    function GenerateCaptcha() {
+      var chr1 = Math.ceil(Math.random() * 10) + '';
+      var chr2 = Math.ceil(Math.random() * 10) + '';
+      var chr3 = Math.ceil(Math.random() * 10) + '';
+
+      var str = new Array(4).join().replace(/(.|$)/g, function () { return ((Math.random() * 36) | 0).toString(36)[Math.random() < .5 ? "toString" : "toUpperCase"](); });
+      var captchaCode = str + chr1 + ' ' + chr2 + ' ' + chr3;
+      document.getElementById("txtCaptcha").value = captchaCode;
+      document.getElementById("abcd").innerHTML = "";
+
+
+    }
+
+    /* Validating Captcha Function */
+    function ValidCaptcha() {
+      var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+      var str2 = removeSpaces(document.getElementById('txtCompare').value);
+
+      if (str1 == str2) {
+        document.getElementById("save").type = "submit";
+        document.getElementById('txtCompare').style.border = ''
+
+        return true;
+      };
+      document.getElementById('abcd').innerHTML = "Wrong captcha";
+      document.getElementById('txtCompare').value = "";
+      document.log.txtCompare.focus();
+
+      document.getElementById('txtCompare').style.border = '2px solid red'
+      return false;
+    }
+
+    /* Remove spaces from Captcha Code */
+    function removeSpaces(string) {
+      return string.split(' ').join('');
+    }  
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0"
+    nonce="UDIJhes3"></script>
+</head>
+
+<body style="background-color:rgb(49, 43, 56)">
+  <div class="container p-3 ">
+    <div class="mt-3">
+      <h1
+        style="text-align: center; padding: 15px;color: #e0dfdc;
+        background: #556677;
+        letter-spacing: .1em;
+        
+        text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0,0,0,0.9);
+        color: #e0dfdc;
+        background: #184A45FF;">
+        Welcome To Creative MindQ Blog</h1>
+    </div>
+
+    <ul class="nav nav-tabs p-2" id="myTab" role="tablist" style="background-color:#000000FF">
+      <li class="nav-item " role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+          role="tab" aria-controls="home" aria-selected="true"><a href="/login"
+            style="text-decoration:none ;"><b>home</b></a></button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+          role="tab" aria-controls="profile" aria-selected="false"><b>About Us</b></button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+          role="tab" aria-controls="contact" aria-selected="false"><b>Contact</b></button>
+      </li>
+      
+        <a class="btn btn-outline-success" style="text-decoration: none;color: rgb(23, 18, 176);color: white;margin-left: 640px;"
+          href="/SignUp"><b>New
+            User</b></a>
+   
+      
+        <a class="btn btn-outline-success" style="text-decoration: none;color: rgb(23, 18, 176);color: white;margin-left: 10px;"
+          href="/LogIn"><b>login</b></a>
+      
+
+
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+        <div class="row">
+          <center>
+            <form action="{%url 'login'%}" method="post">
+              <select name="search" class="form-control mt-3 w-25" id="" placeholder="search catogery here!!"
+                style="width:100% ; height: 40px; display: inline-block;">
+                <option value="education">Education</option>
+                <option value="sport">Sport</option>
+                <option value="funny">Funny</option>
+                <option value="politics">Politics</option>
+                <option value="business">business</option>
+                <option value="fullstack">Fullstack</option>
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+
+              </select>
+              &nbsp;<button type="submit" style="display: inline-block;"
+                class="btn btn-success form-control w-auto ">Search</button>
+          </center>
+
+          </form>
+        </div>
+        {% if yourdata %}
+        {% for i in yourdata %}
+
+        <div class="card text-bg-primary mb-3 mt-5 text-dark  btn-outline-danger"
+          style="font-weight: bold; font-size: large;background-color: #184A45FF;"> {% if i.image %}
+          <center><img src=../{{i.image}} alt="not found" style='height:400px;width: 100%;' ></center>
+          {% endif %}
+          <center>
+            <div class="card-header w-50 text-light" style="font-weight: bold;font-size: 30px;">{{i.title}}&nbsp;?</div>
+          </center>
+          <div class="card-body p-5" style="background-color: white;">
+            <p class="card-text">{{i.data|safe}}</p>
+          </div>
+          <div class="card-body pb-3" style="background-color: white;">
+            <hr>
+
+            <div class="row p-5">
+              <div class="col-1 bg-dark text-light" style="width: 30px;float: left;padding: 30px;padding-top: 60px;color: #e0dfdc;
+              background: #556677;
+              letter-spacing: .1em;
+              text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0,0,0,0.9);
+              color: #e0dfdc;
+              background: #000000;">
+                {{i.category|title}}</div>
+              <div class="col-10">
+                <div style="background-color: white;">
+                  <center>
+                    <div class="fb-like" data-href="http://127.0.0.1:8000/login/?next=/{{i.id}}" data-width=""
+                      data-layout="button" data-action="like" data-size="large" data-share="true"></div>
+                  </center>
+                  <br>
+                  <div class="fb-comments " data-href="http://127.0.0.1:8000/login/?next=/{{i.id}}" data-width=""
+                    data-numposts="" style="margin-left:150px ;">
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 bg-dark text-light"
+                style="width:30px;margin-left: 38px;float: right;padding: 30px;padding-top: 60px;color: #e0dfdc;
+                background: #556677;
+                letter-spacing: .1em;
+                text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0,0,0,0.9);
+                color: #e0dfdc;
+                background: #000000;"> Creative
+              </div>
+
+
+
+            </div>
+            <center>{{i.datetime}} <p class=" w-50  p-2" style="height: 60px;font-size: 30px;color: #A7DD3C;
+              background: #FFFFFF;
+              text-shadow: 2px 0 0px #800040, 3px 2px 0px rgba(77,0,38,0.5), 3px 0 3px #FF002B, 5px 0 3px #800015, 6px 2px 3px rgba(77,0,13,0.5), 6px 0 9px #FF5500, 8px 0 9px #802A00, 9px 2px 9px rgba(77,25,0,0.5), 9px 0 18px #FFD500, 11px 0 18px #806A00, 12px 2px 18px rgba(77,66,0,0.5), 12px 0 30px #D4FF00, 14px 0 30px #6A8000, 15px 2px 30px rgba(64,77,0,0.5), 15px 0 45px #80FF00, 17px 0 45px #408000, 17px 2px 45px rgba(38,77,0,0.5);
+              color: #A7DD3C;
+              background: #FFFFFF;">
+                <b>Posted_By-{{i.name}}</b>
+              </p>
+            </center>
+          </div>
+
+        </div>
+        {% endfor %}
+
+        {% else %}
+        {% for i in blog %}
+
+
+        <div class="card text-bg-primary mb-3 mt-5 text-dark  btn-outline-danger"
+          style="font-weight: bold; font-size: large;background-color: #184A45FF;"> {% if i.image %}
+          <center><img src=../{{i.image}} alt="not found" style='height:400px;width: 100%;'></center>
+          {% endif %}
+          <center>
+            <div class="card-header w-50 text-light" style="font-weight: bold;font-size: 30px;">{{i.title}}&nbsp;?</div>
+          </center>
+          <div class="card-body p-5" style="background-color: white;">
+            <p class="card-text">{{i.data|safe}}</p>
+          </div>
+          <div class="card-body pb-3" style="background-color: white;">
+            <hr>
+
+            <div class="row p-5">
+              <div class="col-1 " style="width: 30px;float: left;padding: 30px;padding-top: 60px;color: #e0dfdc;
+              background: #556677;
+              letter-spacing: .1em;
+              text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0,0,0,0.9);
+              color: #e0dfdc;
+              background: #000000;">
+                {{i.category|title}}</div>
+              <div class="col-10">
+                <div style="background-color: white;">
+                  <center>
+                    <div class="fb-like" data-href="http://127.0.0.1:8000/login/?next=/{{i.id}}" data-width=""
+                      data-layout="button" data-action="like" data-size="large" data-share="true"></div>
+                  </center>
+                  <br>
+                  <div class="fb-comments " data-href="http://127.0.0.1:8000/login/?next=/{{i.id}}" data-width=""
+                    data-numposts="" style="margin-left:150px ;">
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 "
+                style="width:30px;margin-left: 38px;float: right;padding: 30px;padding-top: 60px;color: #e0dfdc;
+                background: #556677;
+                letter-spacing: .1em;
+                text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0,0,0,0.9);
+                color: #e0dfdc;
+                background: #000000;"> {{i.category|title}}
+              </div>
+
+
+
+            </div>
+            <center>{{i.datetime}} <p class=" w-50  p-2" style="height: 60px;font-size: 30px;color: #A7DD3C;
+              background: #FFFFFF;
+              text-shadow: 2px 0 0px #800040, 3px 2px 0px rgba(77,0,38,0.5), 3px 0 3px #FF002B, 5px 0 3px #800015, 6px 2px 3px rgba(77,0,13,0.5), 6px 0 9px #FF5500, 8px 0 9px #802A00, 9px 2px 9px rgba(77,25,0,0.5), 9px 0 18px #FFD500, 11px 0 18px #806A00, 12px 2px 18px rgba(77,66,0,0.5), 12px 0 30px #D4FF00, 14px 0 30px #6A8000, 15px 2px 30px rgba(64,77,0,0.5), 15px 0 45px #80FF00, 17px 0 45px #408000, 17px 2px 45px rgba(38,77,0,0.5);
+              color: #A7DD3C;
+              background: #FFFFFF;">
+                <b>Posted_By-{{i.name}}</b>
+              </p>
+            </center>
+          </div>
+
+        </div>
+        {% endfor %}
+        {% endif %}
+        </center>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+
+
+
+        <div class="mt-4 p-5 bg-primary text-white rounded">
+          <h1> “Don’t try to plan everything out to the very last detail. I’m a big believer in just getting it out
+            there: create a minimal website, launch it, and get feedback.”</h1>
+          <p>@Anshu_Vishwakarma</p>
+        </div>
+
+
+
+        <section style="background-color: #eee;">
+          <div class="container py-5">
+
+
+            <center>
+              <div class="row">
+                <div class="col-lg-4">
+                  <img src="{% static 'images/ab4.jpeg'%}" style=" width:150px;border-radius: 30px;" alt="">
+                  <title>Placeholder</title>
+
+
+                  <h2>MernStack Developer</h2>
+                  <p>Anshu_Vishwakarma</p>
+                  <!-- <p><a class="btn btn-secondary" href="#">profile »</a></p> -->
+                </div>
+                <div class="col-lg-4">
+                  <img src="{% static 'images/abhi.jpeg'%}" style=" width:150px;border-radius: 30px;" alt="">
+
+
+                  <h2>Frontend Developer</h2>
+                  <p>Abhishek_Dixit</p>
+                  <!-- <p><a class="btn btn-secondary" href="#">Profile »</a></p> -->
+                </div>
+                <div class="col-lg-4">
+                  <img src="{% static 'images/shiv.jpeg'%}" style=" width:150px;border-radius: 30px;" alt="">
+
+
+                  <h2>Fullstack Developer</h2>
+                  <p>Shivam_Vyas</p>
+                  <!-- <p><a class="btn btn-secondary" href="#">Profile »</a></p> -->
+                </div>
+              </div>
+            </center>
+          </div>
+        </section>
+
+
+
+
+
+
+
+      </div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+
+        <div class="container my-4">
+
+
+
+
+
+
+
+          <!-- Section: Contact v.1 -->
+          <section class="my-5">
+
+            <!-- Section heading -->
+
+            <center>
+              <h2 class="h1-responsive font-weight-bold text-center my-5 alert alert-light w-25 text-success">Contact us
+              </h2>
+            </center>
+            <hr>
+            <!-- Section description -->
+            <p class="text-center w-responsive mx-auto pb-5">
+
+
+
+
+
+            </p>
+
+            <!-- Grid row -->
+            <div class="row">
+
+              <!-- Grid column -->
+              <div class="col-lg-5 mb-lg-0 mb-4">
+
+                <!-- Form with header -->
+                <div class="card">
+                  <div class="card-body">
+                    <!-- Header -->
+                    <div class="form-header blue accent-1">
+                      <form action="/savemsg" method="post">
+                      <h3 class="mt-2"><i class="fas fa-envelope"></i> Write to us:</h3>
+                    </div>
+                    <p class="dark-grey-text">We'll write rarely, but only the best content.</p>
+                    <!-- Body -->
+                    <div class="md-form">
+                      <i class="fas fa-user prefix grey-text"></i>
+                      <input type="text" id="form-name" name="uname" class="form-control">
+                      <label for="form-name">Your name</label>
+                    </div>
+                    <div class="md-form">
+                      <i class="fas fa-envelope prefix grey-text"></i>
+                      <input type="email" id="form-email" name="uemail" class="form-control">
+                      <label for="form-email">Your email</label>
+                    </div>
+                    <div class="md-form">
+                      <i class="fas fa-tag prefix grey-text"></i>
+                      <input type="text" id="form-Subject" name="usub" class="form-control">
+                      <label for="form-Subject">Subject</label>
+                    </div>
+                    <div class="md-form">
+                      <i class="fas fa-pencil-alt prefix grey-text"></i>
+                      <textarea id="form-text" name="umsg" class="form-control md-textarea" rows="3"></textarea>
+                      <label for="form-text">Send message</label>
+                    </div>
+                    <div class="text-center">
+                      <button class="btn btn-light-blue " type="submit">Submit</button>
+                    </div>
+                  </div>
+                </form>
+                </div>
+                <!-- Form with header -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-lg-7">
+
+                <!--Google map-->
+                <div id="map-container-section" class="z-depth-1-half map-container-section mb-4" style="height: 400px">
+
+
+
+
+
+                  <div id="map" style="height: 400px;"></div>
+
+                  <!-- 
+                       The `defer` attribute causes the callback to execute after the full HTML
+                       document has been parsed. For non-blocking uses, avoiding race conditions,
+                       and consistent behavior across browsers, consider loading using Promises
+                       with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+                      -->
+                  <script
+                    src="https://maps.googleapis.com/maps/api/js?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&callback=initMap&v=weekly"
+                    defer></script>
+
+
+                </div>
+                <!-- Buttons-->
+                <div class="row text-center text-light">
+                  <div class="col-md-4">
+                    <a class="btn-floating blue accent-1">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </a>
+                    <p>Bhopal, 462001</p>
+                    <p class="mb-md-0">Madhya Pradesh</p>
+                  </div>
+                  <div class="col-md-4">
+                    <a class="btn-floating blue accent-1">
+                      <i class="fas fa-phone"></i>
+                    </a>
+                    <p>+ 91 9340155728</p>
+                    <p class="mb-md-0">Mon - Fri, 8:00-22:00</p>
+                  </div>
+                  <div class="col-md-4">
+                    <a class="btn-floating blue accent-1">
+                      <i class="fas fa-envelope"></i>
+                    </a>
+                    <p>mindq@gmail.com</p>
+                    <p class="mb-0">www.mindq.com</p>
+                  </div>
+                </div>
+
+              </div>
+              <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+          </section>
+          <!-- Section: Contact v.1 -->
+
+        </div>
+
+
+
+
+
+
+
+      </div>
+    </div>
+    <div class=" mt-5 text-light p-2" style="background-color:black">
+      <footer>
+        <center>
+          <div id="copyright">
+            &copy; All Rights Reserved 2022-2023
+          </div>
+          <div>
+            <span>
+              Designed by <a href="/">MindQ.Com</a>
+            </span>
+          </div>
+        </center>
+      </footer>
+
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>

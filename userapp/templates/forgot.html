@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <title>Login Page</title>
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+
+
+
+    <script type="text/javascript">
+        /* Function to Generat Captcha */
+        function GenerateCaptcha() {
+            var chr1 = Math.ceil(Math.random() * 10) + '';
+            var chr2 = Math.ceil(Math.random() * 10) + '';
+            var chr3 = Math.ceil(Math.random() * 10) + '';
+
+            var str = new Array(4).join().replace(/(.|$)/g, function () { return ((Math.random() * 36) | 0).toString(36)[Math.random() < .5 ? "toString" : "toUpperCase"](); });
+            var captchaCode = str + chr1 + ' ' + chr2 + ' ' + chr3;
+            document.getElementById("txtCaptcha").value = captchaCode;
+            document.getElementById("abcd").innerHTML = "";
+
+
+        }
+
+        /* Validating Captcha Function */
+        function ValidCaptcha() {
+            var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+            var str2 = removeSpaces(document.getElementById('txtCompare').value);
+
+            if (str1 == str2) {
+                document.getElementById("save").type = "submit";
+                document.getElementById('txtCompare').style.border = ''
+
+                return true;
+            };
+            document.getElementById('abcd').innerHTML = "Wrong captcha";
+            document.getElementById('txtCompare').value = "";
+            document.log.txtCompare.focus();
+
+            document.getElementById('txtCompare').style.border = '2px solid red'
+            return false;
+        }
+
+        /* Remove spaces from Captcha Code */
+        function removeSpaces(string) {
+            return string.split(' ').join('');
+        }  
+    </script>
+</head>
+
+<body onload="GenerateCaptcha();" class="badge-primary" >
+
+    <div class="container">
+
+
+
+
+
+        <div class="d-flex justify-content-center h-100">
+            <div class="card" style="margin-top:130px;width: 60%;height: 300px;color: white; border-radius: 30px;background-color: black;">
+                <h2 style="text-align: center;padding-top:10px;">Blog Otp Verification</h2>
+
+
+                <div class="card-body" style=background-image:url({% static 'images/captcha.jpg' %});>
+                    <form name="log" action="/changepass" method="post">
+
+
+                        <center>
+                            <span> <input type="text" id="txtCaptcha" hidden name="otp" />
+                                <br>
+
+                            </span>
+                             <input type="email" id="txtCompare" placeholder="Enter your gmail id..!!" name="code" style="width:300px;font-weight: bold ;height:50px;border-radius:10px;text-align:center;color:black" />
+                            <br>
+                            <br>
+                            <input type="submit" id="btnrefresh" value="send otp" class="btn btn-outline-danger" style="font-weight:bold ; font-size:large"/>
+                        </center>
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class=" mt-5 text-light p-2" style="background-color:black">
+        <footer >
+            
+
+            <center>
+                <div id="copyright">
+                    &copy; All Rights Reserved 2022-2023
+                </div>
+                <div >
+                    <span>
+                        Designed by <a href="https://respectcoder.blogspot.com/">MindQ.Com</a>
+                    </span>
+                </div>
+            </center>
+        </footer>
+    </div>
+
+</body>
+
+</html>
